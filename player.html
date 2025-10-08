@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player - Meu Heitorflix</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(20, 20, 20, 0.9);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e50914;
+    }
+
+    .back-button {
+      background: #e50914;
+      border: none;
+      padding: 8px 18px;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-button:hover {
+      background: #f6121d;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    video {
+      width: 90%;
+      max-width: 1000px;
+      border-radius: 10px;
+      outline: none;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <video id="videoPlayer" controls autoplay muted></video>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const videoFile = urlParams.get("video");
+  const player = document.getElementById("videoPlayer");
+
+  if (videoFile) {
+    player.src = "src/videos/" + videoFile; // <--- olha o caminho aqui
+    player.play().catch(() => {
+      console.log("Autoplay bloqueado — precisa apertar play.");
+    });
+  } else {
+    document.querySelector("main").innerHTML =
+      "<h2 style='color:white'>Vídeo não encontrado!</h2>";
+  }
+</script>
+
+    <div class="logo">Heitorflix</div>
+    <button class="back-button" onclick="location.href='browse.html'">← Voltar</
